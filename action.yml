@@ -1,0 +1,32 @@
+name: 'Giphy PR Comment'
+description: 'Add a Giphy GIF comment to new pull request'
+inputs:
+  github-token:
+    description: 'Github Token'
+    required: true 
+  giphy-api-key: 
+    description: 'giphy API key'
+    required: true
+
+runs:
+  using: 'docker'
+  image: 'Dockerfile'
+  args:
+    - ${{inputs.github-token}}
+    - ${{inputs.giphy-api-key}}
+
+## how does this work# 
+# 1. make a name and and discription of the action and add inputs 
+# 2. the 2 inputs reps the api key and token are in the shell script to call the giphy api to pull requests to the comments of chats
+# 3. run the action and sh. runs on the dockerfile that builds the image and executes the request thru the entrypoint.sh source code
+# 4. the args is that it uses inputs on both dockerfile and entrypoint.sh source code 
+
+## how to test everything ##
+# 1. create the github actions for workflows .github/workflows/
+# 2. create a file test.yml
+# 3. create a job 
+# 4. commit and push 
+
+
+
+# docs: https://docs.github.com/en/actions/tutorials/use-containerized-services/create-a-docker-container-action

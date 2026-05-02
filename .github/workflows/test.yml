@@ -1,0 +1,35 @@
+name: use giphy in comments
+
+on: 
+    pull_request:
+        types:
+            - opened 
+
+jobs:
+  testing-action:
+    runs-on: ubuntu-latest 
+    permissions:
+      issues: write 
+      pull-requests: write
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v5
+
+      - name: Post PR Comment
+        uses: ./
+        with:
+          github-token: ${{ secrets.GITHUB_TOKEN }}
+          giphy-api-key: ${{ secrets.GIPHY_API_KEY }}
+
+
+# how does it all work ##
+# 1. name the workflow 
+# 2. the workflow executes the on when ever there is a pull request of type: opened its going to execute the workflow below
+# 3. running jobs testing action running on ubuntu-latest 
+# 4. permissions: adding the write permission for issues and pull request by default it is read only on the pull_request so a user can post a gif comment (also in dockerfile chmod +X)
+# 4.1 permissions is also used for the GITHUB_TOKEN to write, without it by default it only reads on the job level 
+# 5. to access the action.yml, DOCKERFILE, and entrypoint action checkout will allow user to read  and use repo 
+# 6. uses: ./ means since the action is part of the same repo you can use users as ./ 
+# 7. with: github_token is automatically created by the repo just put ${{secrets.}} also GITHUB_REPO_OWNER is built in to the repo 
+# 8. with: giphy_api_key add the api key from the developer.giphy into the repo secrets 
+
