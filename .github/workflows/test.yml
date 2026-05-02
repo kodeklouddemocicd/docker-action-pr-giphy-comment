@@ -1,26 +1,23 @@
-name: use giphy in comments
-
-on: 
-    pull_request:
+on:
+  pull_request: 
         types:
-            - opened 
+         - opened
 
 jobs:
   testing-action:
-    runs-on: ubuntu-latest 
+    runs-on: ubuntu-latest
     permissions:
-      issues: write 
+      issues: write
       pull-requests: write
     steps:
-      - name: Checkout repository
-        uses: actions/checkout@v5
+    - name: Checkout Repository
+      uses: actions/checkout@v3
 
-      - name: Post PR Comment
-        uses: ./
-        with:
-          github-token: ${{ secrets.GITHUB_TOKEN }}
-          giphy-api-key: ${{ secrets.GIPHY_API_KEY }}
-
+    - name: Post PR Comment
+      uses: ./
+      with:
+        github-token: ${{ secrets.GITHUB_TOKEN }}
+        giphy-api-key: ${{ secrets.GIPHY_API_KEY }}
 
 # how does it all work ##
 # 1. name the workflow 

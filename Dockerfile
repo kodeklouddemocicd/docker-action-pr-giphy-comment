@@ -15,22 +15,20 @@
 # Request URL: generates random giphys url
 # --------------------------------------------------------------------
 
-# docker build -t . 
-  
-# Container image that runs your code 
-FROM alpine:3.10 
+# Container image that runs your code
+FROM alpine:3.10
 
-# # install necessary packages 
+# # Install necessary packages
 RUN apk update && \
-    apk add --no-cache curl jq    
+    apk add --no-cache curl jq
 
-# # copy entrypoint script to the container file path
-COPY entrypoint.sh /entrypoint.sh 
+# Copy your entrypoint script to the container file path
+COPY entrypoint.sh /entrypoint.sh
 
-# # Make the script executable 
- RUN chmod +X /entrypoint.sh 
+# Make the script executable
+RUN chmod +x /entrypoint.sh
 
-# # code file to execute when the docker container starts up ('entrypoint.sh')
+# Code file to execute when the docker container starts up (`entrypoint.sh`)
 ENTRYPOINT ["/entrypoint.sh"]
 
 
